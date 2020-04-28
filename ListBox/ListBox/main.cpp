@@ -20,7 +20,7 @@ BOOL CALLBACK DlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	case WM_INITDIALOG:
 	{
 		hList = GetDlgItem(hwnd, IDC_LIST1);
-		for (int i = 0; i < sizeof(str) / 4; i++)
+		for (int i = 0; i < sizeof(str) / sizeof(CHAR*); i++)
 		{
 			SendMessage(hList, LB_ADDSTRING, 0, (LPARAM)str[i]);
 		}
