@@ -18,12 +18,25 @@ BOOL CALLBACK DlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	switch (uMsg)
 	{
 	case WM_INITDIALOG:
+	{
+		hList = GetDlgItem(hwnd, IDC_LIST1);
+		for (int i = 0; i < sizeof(str) / 4; i++)
+		{
+			SendMessage(hList, LB_ADDSTRING, 0, (LPARAM)str[i]);
+		}
 		break;
+	}
 	case WM_COMMAND:
 		switch (LOWORD(wParam))
 		{
 		case IDOK:
-			break;
+		{
+			CHAR str[256]{};
+			int i = SendMessage(hList, LB_GETCURSEL, 0, 0);
+			SendMessage(hList, LB_GETTEXT, i, (LPARAM)str);
+			MessageBox(hwnd, str, "Info", MB_OK|MB_ICONINFORMATION);
+		}
+		break;
 		case IDCANCEL:
 			EndDialog(hwnd, 0);
 			break;
